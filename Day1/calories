@@ -36,10 +36,18 @@ def getTopThree(listNbr):
 
 
 def main(av):
+    if len(av) < 2:
+        print("Please use option 1 for star 1 print, or 2 for start 2 print")
+        return (84)
     content = openFile(av)
     listNbr = parseElves(content)
     result = getTopThree(listNbr)
-    print(sum(result))
+    if av[1] == "1":
+        print(max(listNbr))
+    elif av[1] == "2":
+        print(sum(result))
+    else:
+        return (84)
 
 if __name__  == "__main__":
     sys.exit(main(sys.argv[1:]))
