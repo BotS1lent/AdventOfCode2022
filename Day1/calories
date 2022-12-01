@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+import sys
+
+######################## HELPER & MAIN ########################
+
+def openFile(av):
+    try:
+        file = open(av[0], 'r')
+    except IOError:
+        exit(84)
+    tmp_str = file.read()
+    if (len(tmp_str) == 0):
+        exit(84)
+    return (tmp_str)
+
+def parseElves(content : str):
+    splitted = content.splitlines()
+    elves = []
+    total = 0
+    for element in splitted:
+        if element == '' and total != 0:
+            elves.append(total)
+            total = 0
+            continue
+        total += int(element)
+    return elves
+
+def getTopThree(listNbr):
+    result = []
+    maxi = 0
+    for i in range(3):
+        maxi = max(listNbr)
+        result.append(max(listNbr))
+        listNbr.pop(listNbr.index(maxi))
+    return (result)
+
+
+def main(av):
+    content = openFile(av)
+    listNbr = parseElves(content)
+    result = getTopThree(listNbr)
+    print(sum(result))
+
+if __name__  == "__main__":
+    sys.exit(main(sys.argv[1:]))
