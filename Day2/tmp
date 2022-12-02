@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+import sys
+
+######################## HELPER & MAIN ########################
+
+def openFile(av):
+    try:
+        file = open(av[0], 'r')
+    except IOError:
+        exit(84)
+    tmp_str = file.read()
+    if (len(tmp_str) == 0):
+        exit(84)
+    return (tmp_str)
+
+def funcRock(played):
+    if (played == 'X'):
+        return (3)
+    if (played == 'Y'):
+        return (4)
+    if (played == 'Z'):
+        return (8)
+
+def funcPaper(played):
+    if (played == 'X'):
+        return (1)
+    if (played == 'Y'):
+        return (5)
+    if (played == 'Z'):
+        return (9)
+
+def funcCissor(played):
+    if (played == 'X'):
+        return (2)
+    if (played == 'Y'):
+        return (6)
+    if (played == 'Z'):
+        return (7)
+
+def parseStrat(content : str):
+    splitted = content.splitlines()
+    total = 0
+    for element in splitted:
+        tmp = element.split()
+        if tmp[0] == 'A':
+            total += funcRock(tmp[1])
+        elif tmp[0] == 'B':
+            total += funcPaper(tmp[1])
+        elif tmp[0] == 'C':
+            total += funcCissor(tmp[1])
+    return total
+
+def main(av):
+    content = openFile(av)
+    content = parseStrat(content)
+    print(content)
+
+if __name__  == "__main__":
+    sys.exit(main(sys.argv[1:]))
